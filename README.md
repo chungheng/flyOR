@@ -13,3 +13,7 @@ to represent the response __pattern__ across all receptor types. In more details
 * For a fixed odorant, the pattern should vary under different concentration.
 * The outcome of this program should will be used as the input to the transduction
   model of odor receptor, or to the functional model of the olfactory sensory neuron.
+
+### Usage ###
+
+    resp = Odor_Receptor_Map[c,odor]
