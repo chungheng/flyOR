@@ -84,11 +84,13 @@ class HallemORMap(BaseORMap):
             self.osn = f.readline().split('\t')[1:]
             for line in f:
                 seg = line.split('\t')
-                self._ordict[seg[0]] = [float(x) for x in seg[1:]]
+                self._ordict[seg[0]] = np.array([float(x) for x in seg[1:]])
         super(HallemORMap,self).__init__(len(self._ordict))
 
     def __getitem__(self,item):
-        return self._ordict[item[1]]
+        c = item[0]
+        return (1.-c)*self._ordict['spontaneous firing rate'] + \
+               c*self._ordict[item[1]]
 
 
 if __name__ == "__main__":
