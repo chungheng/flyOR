@@ -1,5 +1,10 @@
+from os.path import join, dirname
 import numpy as np
 import pandas as pd
+
+data = {'Hallem':'Hallem_2006.tsv',
+	'DoOR':'DoOR_raw.txt'}
+filename = {x:join(dirname(__file__), '../data/'+y) for x,y in data.items()}
 
 class BaseORMap(object):
     """
@@ -76,6 +81,26 @@ class BaseORMap(object):
         else:
             c = item
         return [c]*self.n
+
+class HallemORMap(BaseORMap):
+    """
+    Hallem and Carlson Dataset
+    """
+    def __init__(self,filename=filename['Hallem']):
+        self._ordict = {}
+        with open(filename,'r') as f:
+            self.gl = f.readline().strip('\n').split('\t')[1:]
+            self.osn = f.readline().strip('\n').split('\t')[1:]
+            for line in f:
+                seg = line.strip('\n').split('\t')
+                self._ordict[seg[0]] = np.array([float(x) for x in seg[1:]])
+        super(HallemORMap,self).__init__(len(self._ordict))
+
+    def __getitem__(self,item):
+        c = item[0]
+        return (1.-c)*self._ordict['spontaneous firing rate'] + \
+               c*self._ordict[item[1]]
+
 
 if __name__ == "__main__":
     B = BaseORMap(5)
