@@ -1,7 +1,9 @@
 import numpy as np
+import pandas as pd
 
 class BaseORMap(object):
     """
+    Base Olfactory Receptor Mapping Class
 
     Attributes:
     -----------
@@ -76,7 +78,9 @@ class BaseORMap(object):
         return [c]*self.n
 
 class HallemORMap(BaseORMap):
-
+    """
+    Hallem and Carlson Dataset
+    """
     def __init__(self,filename):
         self._ordict = {}
         with open(filename) as f:
