@@ -101,6 +101,13 @@ class HallemORMap(BaseORMap):
         return (1.-c)*self._ordict['spontaneous firing rate'] + \
                c*self._ordict[item[1]]
 
+class DoORMap(BaseORMap):
+    """
+    DoOR Dataset
+    """
+    def __init__(self,filename=filename['DoOR']):
+        self.df = pd.read_csv(filename, delimiter='\t')
+        super(DoORMap,self).__init__(len(self.df))
 
 if __name__ == "__main__":
     B = BaseORMap(5)
