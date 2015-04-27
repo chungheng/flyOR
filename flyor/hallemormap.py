@@ -1,6 +1,7 @@
+import os
 from baseormap import BaseORMap
 
-filename = '../data/Hallem_2006.csv'
+filename = os.path.join(os.path.dirname(__file__), '../data/Hallem_2006.csv')
 
 class HallemORMap(BaseORMap):
     """
