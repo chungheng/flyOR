@@ -4,7 +4,7 @@ import sys, os
 from glob import glob
 
 data_dir = 'data'
-data_files = [(data_dir, [f for f in glob.glob(os.path.join(datadir, '*'))])]
+data_files = [(data_dir, [f for f in glob(os.path.join(data_dir, '*'))])]
 
 # Install setuptools if it isn't available:
 try:
