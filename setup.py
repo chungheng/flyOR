@@ -3,6 +3,9 @@
 import sys, os
 from glob import glob
 
+data_dir = 'data'
+data_files = [(data_dir, [f for f in glob.glob(os.path.join(datadir, '*'))])]
+
 # Install setuptools if it isn't available:
 try:
     import setuptools
@@ -15,7 +18,7 @@ from distutils.command.install_headers import install_headers
 from setuptools import find_packages
 from setuptools import setup
 
-NAME =               'flyOR'
+NAME =               'flyor'
 VERSION =            '0.1'
 AUTHOR =             'Chung-Heng (Jason) Yeh'
 AUTHOR_EMAIL =       'chungheng.yeh@gmail.com'
@@ -42,7 +45,7 @@ if __name__ == "__main__":
 	if os.path.exists('MANIFEST'):
 		os.remove('MANIFEST')
 
-	# This enables the installation of neurokernel/__init__.py as a data
+	# This enables the installation of flyor/__init__.py as a data
 	# file:
 	for scheme in INSTALL_SCHEMES.values():
 		scheme['data'] = scheme['purelib']
@@ -63,7 +66,7 @@ if __name__ == "__main__":
 		packages = PACKAGES,
 
 		# Force installation of __init__.py in namespace package:
-		data_files = [('data', ['DoOR_raw.txt'])],
+		data_files = data_files,
 		include_package_data = True,
 		install_requires = [
 			'numexpr >= 2.3',
